@@ -3,7 +3,7 @@
 ---
 
 <header class="bg-black text-white px-20 py-10">
-    <nav class="font-anton text-[22px] font-semibold">
+    <nav class="font-anton text-[22px]">
         <a href="/" class="logo-link uppercase text-2xl">
             <span class="arrow">&lt;</span>
             <span>ARCJ Events</span>
@@ -20,15 +20,14 @@
 
         .arrow {
             display: inline-block;
-            opacity: 0;
-            transform: translateX(10px);
+            opacity: 1;
+            transform: translateX(0);
             transition: all 0.3s ease;
         }
 
         &:hover {
             .arrow {
-                opacity: 1;
-                transform: translateX(0);
+                transform: translateX(-5px);
             }
         }
     }
