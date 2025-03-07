@@ -1,0 +1,35 @@
+---
+
+---
+
+<header class="bg-black text-white px-20 py-10">
+    <nav class="font-anton text-[22px] font-semibold">
+        <a href="/" class="logo-link uppercase text-2xl">
+            <span class="arrow">&lt;</span>
+            <span>ARCJ Events</span>
+        </a>
+    </nav>
+</header>
+
+<style lang="scss">
+    .logo-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+
+        .arrow {
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+        }
+
+        &:hover {
+            .arrow {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    }
+</style>
