@@ -2,13 +2,16 @@
 import Layout from "../layouts/Layout.astro";
 import SecondaryHeader from "@components/shared/SecondaryHeader.astro";
 import Hero from "@components/events/Hero.astro";
-import Model1 from "@assets/society/gallery/model_1.jpg";
-import Model2 from "@assets/society/gallery/model_2.jpg";
-import Model3 from "@assets/society/gallery/model_3.jpg";
-import Model4 from "@assets/society/gallery/model_4.jpg";
-import Model5 from "@assets/society/gallery/model_5.jpg";
 
 import { Image } from "astro:assets";
+const rawImports = import.meta.glob<ImageMetadata>(
+    "../assets/society/gallery/*.jpg",
+    {
+        eager: true,
+        import: "default",
+    }
+);
+const images = Object.values(rawImports);
 ---
 
 <Layout>
@@ -32,42 +35,19 @@ import { Image } from "astro:assets";
                     </iframe>
                 </div>
             </div>
+
             <div class="grid grid-cols-4 gap-10">
-                <div class="aspect-[3/4] overflow-hidden">
-                    <Image
-                        src={Model1}
-                        alt="Model 1"
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-                <div class="aspect-[3/4] overflow-hidden">
-                    <Image
-                        src={Model2}
-                        alt="Model 2"
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-                <div class="aspect-[3/4] overflow-hidden">
-                    <Image
-                        src={Model3}
-                        alt="Model 3"
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-                <div class="aspect-[3/4] overflow-hidden">
-                    <Image
-                        src={Model4}
-                        alt="Model 4"
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-                <div class="aspect-[3/4] overflow-hidden">
-                    <Image
-                        src={Model5}
-                        alt="Model 5"
-                        class="w-full h-full object-cover"
-                    />
-                </div>
+                {
+                    images.map((src, index) => (
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <Image
+                                src={src}
+                                alt={`Gallery image ${index + 1}`}
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                    ))
+                }
             </div>
         </div>
     </div>
