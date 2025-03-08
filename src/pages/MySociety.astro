@@ -2,9 +2,73 @@
 import Layout from "../layouts/Layout.astro";
 import SecondaryHeader from "@components/shared/SecondaryHeader.astro";
 import Hero from "@components/events/Hero.astro";
+import Model1 from "@assets/society/gallery/model_1.jpg";
+import Model2 from "@assets/society/gallery/model_2.jpg";
+import Model3 from "@assets/society/gallery/model_3.jpg";
+import Model4 from "@assets/society/gallery/model_4.jpg";
+import Model5 from "@assets/society/gallery/model_5.jpg";
+
+import { Image } from "astro:assets";
 ---
 
 <Layout>
-    <SecondaryHeader />
-    <Hero />
+    <div class="bg-black">
+        <SecondaryHeader />
+        <Hero />
+        <div class="py-20 w-full"></div>
+        <div class="container w-full mr-auto px-5">
+            <div class="col-span-4 mb-20">
+                <div
+                    class="relative w-full aspect-video overflow-hidden rounded-[10px] max-h-[600px]"
+                    style="background-image: url('https://img.youtube.com/vi/tWSSAZCVx_c/maxresdefault.jpg'); background-size: cover; background-position: center;"
+                >
+                    <iframe
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/tWSSAZCVx_c?autoplay=0&rel=0"
+                        title="MySociety Event Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    >
+                    </iframe>
+                </div>
+            </div>
+            <div class="grid grid-cols-4 gap-10">
+                <div class="aspect-[3/4] overflow-hidden">
+                    <Image
+                        src={Model1}
+                        alt="Model 1"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+                <div class="aspect-[3/4] overflow-hidden">
+                    <Image
+                        src={Model2}
+                        alt="Model 2"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+                <div class="aspect-[3/4] overflow-hidden">
+                    <Image
+                        src={Model3}
+                        alt="Model 3"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+                <div class="aspect-[3/4] overflow-hidden">
+                    <Image
+                        src={Model4}
+                        alt="Model 4"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+                <div class="aspect-[3/4] overflow-hidden">
+                    <Image
+                        src={Model5}
+                        alt="Model 5"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
 </Layout>
