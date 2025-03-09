@@ -1,5 +1,15 @@
 ---
 import "@styles/global.css";
+import SEO from "@components/shared/SEO.astro";
+
+export interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    type?: "website" | "article";
+}
+
+const { title, description, image, type } = Astro.props;
 ---
 
 <!doctype html>
@@ -9,13 +19,13 @@ import "@styles/global.css";
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
+        <SEO {title} {description} {image} {type} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet"
         />
-        <title>ARCJ Events</title>
     </head>
     <body>
         <slot />
