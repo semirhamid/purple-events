@@ -11,18 +11,18 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
 ---
 
 <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 overflow-hidden t1"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 overflow-hidden"
 >
     {
         images.map((src, index) => (
-            <div class="gallery-item opacity-0 translate-y-20">
+            <div class="gallery-item group">
                 <div class="aspect-[3/4] overflow-hidden relative">
                     <HoverImage
                         src={src}
                         alt={`${altPrefix} ${index + 1}`}
-                        className="object-cover h-full w-full transition-transform duration-700 ease-out hover:scale-110"
+                        className="object-cover h-full w-full transform transition-all duration-700 ease-out group-hover:scale-110"
                     />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-50 hover:opacity-0 transition-opacity duration-700 ease-out" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-50 transform transition-all duration-700 ease-out group-hover:opacity-0 group-hover:translate-y-full" />
                 </div>
             </div>
         ))
@@ -35,30 +35,46 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
 
     gsap.registerPlugin(ScrollTrigger);
 
-    document.querySelectorAll(".gallery-item").forEach((item, i) => {
-        gsap.fromTo(
-            item,
-            { y: 100, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                ease: "power3.out",
-                duration: 1,
-                delay: i * 0.15,
-                scrollTrigger: {
-                    trigger: item,
-                    start: "top 85%",
-                    end: "bottom 20%",
-                    scrub: 1.5,
-                },
-            }
-        );
+    const galleryItems = document.querySelectorAll(".gallery-item");
+
+    galleryItems.forEach((item, i) => {
+        gsap.set(item, {
+            y: 100,
+            opacity: 0,
+        });
+
+        gsap.to(item, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
+            delay: i * 0.15,
+            scrollTrigger: {
+                trigger: item,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
+            },
+        });
     });
 </script>
 
 <style>
     .gallery-item {
         will-change: transform, opacity;
+        cursor: pointer;
+    }
+
+    .gallery-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.1);
+        opacity: 0;
+        transition: opacity 0.7s ease-out;
+    }
+
+    .gallery-item:hover::after {
+        opacity: 1;
     }
 
     body {
