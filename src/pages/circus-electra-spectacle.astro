@@ -1,8 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "@components/events/CircusElectraSpectacleHero.astro";
-
-import { Image } from "astro:assets";
+import GridGallery from "@components/shared/GridGallery.astro";
 
 const rawImports = import.meta.glob<ImageMetadata>(
     "../assets/circus_spectacle/gallery/*.jpg",
@@ -22,18 +21,8 @@ const images = Object.values(rawImports);
     <div class="bg-black container w-full mx-auto px-5 lg:px-16 pb-28">
         <Hero />
         <div class="py-20 w-full"></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            {
-                images.map((src, index) => (
-                    <div class="aspect-[3/4] overflow-hidden group cursor-pointer">
-                        <Image
-                            src={src}
-                            alt={`Gallery image ${index + 1}`}
-                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-2"
-                        />
-                    </div>
-                ))
-            }
+        <div class="container w-full mr-auto px-5">
+            <GridGallery images={images} altPrefix="Circus Spectacle image" />
         </div>
         <div class="w-full h-96"></div>
     </div>

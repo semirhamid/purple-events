@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import SecondaryHeader from "@components/shared/SecondaryHeader.astro";
 import Hero from "@components/events/Hero.astro";
+import GridGallery from "@components/shared/GridGallery.astro";
 
 import { Image } from "astro:assets";
 const rawImports = import.meta.glob<ImageMetadata>(
@@ -40,19 +41,8 @@ const images = Object.values(rawImports);
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                {
-                    images.map((src, index) => (
-                        <div class="aspect-[3/4] overflow-hidden group cursor-pointer">
-                            <Image
-                                src={src}
-                                alt={`Gallery image ${index + 1}`}
-                                class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-2"
-                            />
-                        </div>
-                    ))
-                }
-            </div>
+            <GridGallery images={images} altPrefix="My Society image" />
+
             <div class="w-full h-96"></div>
             <div class="w-full h-96"></div>
         </div>

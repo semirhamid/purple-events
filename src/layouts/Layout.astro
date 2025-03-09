@@ -2,6 +2,8 @@
 import "@styles/global.css";
 import SEO from "@components/shared/SEO.astro";
 
+import { ClientRouter } from "astro:transitions";
+
 export interface Props {
     title?: string;
     description?: string;
@@ -26,6 +28,7 @@ const { title, description, image, type } = Astro.props;
             href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet"
         />
+        <ClientRouter />
     </head>
     <body>
         <slot />

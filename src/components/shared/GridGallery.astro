@@ -1,0 +1,19 @@
+---
+import HoverImage from "@components/shared/HoverImage.astro";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+    images: ImageMetadata[];
+    altPrefix?: string;
+}
+
+const { images, altPrefix = "Gallery image" } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+    {
+        images.map((src, index) => (
+            <HoverImage src={src} alt={`${altPrefix} ${index + 1}`} />
+        ))
+    }
+</div>

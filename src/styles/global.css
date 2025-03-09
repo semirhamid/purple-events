@@ -123,3 +123,68 @@
      transform: scale(1.1) rotate(2deg);
    }
  }
+
+/* Fade in animation */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Make animations more subtle on devices that prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Mobile hover animation */
+@media (max-width: 768px) {
+  .mobile-in-view .mobile-animate {
+    animation: mobileHoverEffect 2s ease;
+  }
+
+  .mobile-in-view::after {
+    opacity: 1 !important;
+  }
+}
+
+@keyframes mobileHoverEffect {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(0.9);
+  }
+  50% {
+    transform: scale(1.1) rotate(2deg);
+    filter: brightness(1.1) contrast(1.1);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(0.9);
+  }
+}
+
+/* Remove partyPulse animation on mobile */
+@media (max-width: 768px) {
+  .group:hover img {
+    animation: none;
+  }
+}
+
+/* Preserve desktop hover behavior */
+@media (min-width: 769px) {
+  .mobile-in-view .mobile-animate {
+    animation: none;
+  }
+}

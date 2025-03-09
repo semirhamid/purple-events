@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+    src: ImageMetadata;
+    alt: string;
+    aspectRatio?: string;
+}
+
+const { src, alt, aspectRatio = "3/4" } = Astro.props;
+---
+
+<div
+    class={`aspect-[${aspectRatio}] overflow-hidden group cursor-pointer opacity-0 translate-y-10`}
+    data-animate
+>
+    <Image
+        src={src}
+        alt={alt}
+        class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-2 mobile-animate"
+    />
+</div>
+
+<script>
+    function setupAnimations() {
+        const animatedElements = document.querySelectorAll("[data-animate]");
+        const isMobile = window.innerWidth <= 768;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        element.classList.add("animate-fade-in");
+                        element.classList.remove("opacity-0", "translate-y-10");
+
+                        // Add mobile hover animation class when in viewport
+                        if (isMobile) {
+                            element.classList.add("mobile-in-view");
+                        }
+                    } else if (isMobile) {
+                        // Remove the class when out of viewport on mobile
+                        entry.target.classList.remove("mobile-in-view");
+                    }
+                });
+            },
+            {
+                threshold: 0.1,
+                rootMargin: "50px",
+            }
+        );
+
+        animatedElements.forEach((element) => {
+            observer.observe(element);
+        });
+    }
+
+    setupAnimations();
+
+    document.addEventListener("astro:page-load", setupAnimations);
+</script>
