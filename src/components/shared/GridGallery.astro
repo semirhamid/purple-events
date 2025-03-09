@@ -10,16 +10,19 @@ interface Props {
 const { images, altPrefix = "Gallery image" } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 gallery-grid">
+<div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 overflow-hidden"
+>
     {
         images.map((src, index) => (
-            <div class="gallery-item opacity-0">
-                <div class="aspect-[3/4] w-full overflow-hidden">
+            <div class="gallery-item opacity-0 translate-y-20">
+                <div class="aspect-[3/4] overflow-hidden relative">
                     <HoverImage
                         src={src}
                         alt={`${altPrefix} ${index + 1}`}
-                        className="h-full object-cover"
+                        className="object-cover h-full w-full transition-transform duration-700 ease-out hover:scale-110"
                     />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-50 hover:opacity-0 transition-opacity duration-700 ease-out" />
                 </div>
             </div>
         ))
@@ -32,33 +35,21 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const galleryGrids = document.querySelectorAll(".gallery-grid");
-
-    galleryGrids.forEach((grid) => {
-        const items = grid.querySelectorAll(".gallery-item");
-
+    document.querySelectorAll(".gallery-item").forEach((item, i) => {
         gsap.fromTo(
-            items,
+            item,
+            { y: 100, opacity: 0 },
             {
-                opacity: 0,
-                scale: 0.8,
-                y: 100,
-            },
-            {
-                opacity: 1,
-                scale: 1,
                 y: 0,
-                duration: 1.2,
-                stagger: {
-                    amount: 0.8,
-                    from: "random",
-                },
+                opacity: 1,
                 ease: "power3.out",
+                duration: 1,
+                delay: i * 0.15,
                 scrollTrigger: {
-                    trigger: grid,
-                    start: "top bottom-=10%",
-                    end: "bottom center",
-                    toggleActions: "play none none reverse",
+                    trigger: item,
+                    start: "top 85%",
+                    end: "bottom 20%",
+                    scrub: 1.5,
                 },
             }
         );
@@ -68,5 +59,9 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
 <style>
     .gallery-item {
         will-change: transform, opacity;
+    }
+
+    body {
+        background-color: #0f0f0f;
     }
 </style>
