@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import Logo from "@assets/circus_spectacle/logo.png";
+import Hero from "@assets/circus_spectacle/hero.png";
+import JoinFlat from "@assets/common/JOIN US.png";
+---
+
+<section class="bg-black text-white">
+    <div class="container mr-auto w-full grid grid-cols-6 gap-24">
+        <div class="col-span-3 relative pt-36">
+            <div class="flex absolute -top-10 left-3">
+                <Image
+                    src={Logo}
+                    alt="Circus Electra"
+                    class="max-h-28 w-auto"
+                />
+            </div>
+            <h1
+                class="text-8xl uppercase font-sans font-extrabold mb-10 leading-tight text-[#F73C65]"
+            >
+                A Spectacle of Pure Fun
+            </h1>
+            <div class="text-white text-[20px] max-w-10/12">
+                <p class="mb-6">
+                    Step into Circus Electra, a high-energy, fully immersive
+                    event where twisted circus themes and mind-blowing
+                    production create an atmosphere like no other. This is not
+                    just a party—it’s an explosion of visuals, entertainment,
+                    and non-stop excitement.
+                </p>
+                <p class="mb-6">
+                    With world-class DJs dropping electrifying beats to match
+                    the spectacle, expect a lineup of drummers, singers,
+                    dancers, saxophonists, trumpeters, guitarists, and
+                    keyboardists, all bringing the energy to dizzying heights.
+                    Don’t be surprised if a unicorn or a mischievous clown stops
+                    by to say hello! Every moment is captured by our
+                    photographers and videographers, ensuring the memories last
+                    long after the night ends.
+                </p>
+                <p>
+                    This is Circus Electra—All the fun is this way.
+                    #AllTheFunIsThisWay
+                </p>
+            </div>
+            <a href="/join" class="mt-10">
+                <Image
+                    src={JoinFlat}
+                    alt="Join Us"
+                    class="w-full h-auto max-w-[400px]"
+                />
+            </a>
+        </div>
+        <div class="col-span-3 pt-28">
+            <Image
+                src={Hero}
+                alt="Circus Electra"
+                class="w-full h-full object-cover"
+            />
+        </div>
+    </div>
+</section>

@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "@components/events/CircusElectraSpectacleHero.astro";
+
+import { Image } from "astro:assets";
+
+const rawImports = import.meta.glob<ImageMetadata>(
+    "../assets/circus_spectacle/gallery/*.jpg",
+    {
+        eager: true,
+        import: "default",
+    }
+);
+const images = Object.values(rawImports);
+---
+
+<Layout>
+    <div class="bg-black container w-full mx-auto px-16 pb-28">
+        <Hero />
+        <div class="py-20 w-full"></div>
+        <div class="grid grid-cols-4 gap-10">
+            {
+                images.map((src, index) => (
+                    <div class="aspect-[3/4] overflow-hidden">
+                        <Image
+                            src={src}
+                            alt={`Gallery image ${index + 1}`}
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+        <div class="w-full h-96"></div>
+    </div>
+</Layout>
+
+<style>
+    body {
+        background: #000 url("/circus bg.webp") no-repeat center center fixed;
+        background-size: cover;
+        padding: 105px 60px;
+    }
+</style>
