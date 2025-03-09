@@ -12,17 +12,23 @@ const { src, alt, aspectRatio = "3/4", className } = Astro.props;
 ---
 
 <div class={`aspect-[${aspectRatio}] overflow-hidden relative ${className}`}>
-    <Image
-        src={src}
-        alt={alt}
-        class="w-full h-full object-cover will-change-transform"
-    />
+    <Image src={src} alt={alt} class="w-full h-full object-cover" />
 </div>
 
 <style>
     img {
         transform-origin: center;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
-        -webkit-font-smoothing: subpixel-antialiased;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        perspective: 1000px;
+    }
+
+    div {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
     }
 </style>
