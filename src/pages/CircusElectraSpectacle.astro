@@ -15,10 +15,10 @@ const images = Object.values(rawImports);
 ---
 
 <Layout>
-    <div class="bg-black container w-full mx-auto px-16 pb-28">
+    <div class="bg-black container w-full mx-auto px-5 lg:px-16 pb-28">
         <Hero />
         <div class="py-20 w-full"></div>
-        <div class="grid grid-cols-4 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {
                 images.map((src, index) => (
                     <div class="aspect-[3/4] overflow-hidden group cursor-pointer">
@@ -39,6 +39,16 @@ const images = Object.values(rawImports);
     body {
         background: #000 url("/circus bg.webp") no-repeat center center fixed;
         background-size: cover;
-        padding: 105px 60px;
+        padding: 20px 15px;
+    }
+    @media (min-width: 768px) {
+        body {
+            padding: 40px 25px;
+        }
+    }
+    @media (min-width: 1024px) {
+        body {
+            padding: 105px 30px;
+        }
     }
 </style>
