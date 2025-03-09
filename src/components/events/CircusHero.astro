@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import Logo from "@assets/circus/logo.png";
-import Hero from "@assets/circus/hero.png";
 import Join from "@components/buttons/Join.astro";
+import YoutubeShort from "@components/shared/YoutubeShort.astro";
 ---
 
 <section class="bg-black text-white pt-4">
@@ -17,12 +17,8 @@ import Join from "@components/buttons/Join.astro";
                     class="max-h-32 lg:max-h-48 w-auto"
                 />
             </div>
-            <div>
-                <Image
-                    src={Hero}
-                    alt="Circus Electra"
-                    class="w-full h-full object-cover mt-5 lg:mt-0"
-                />
+            <div class="mt-5 lg:mt-0">
+                <YoutubeShort videoId="cjTIccIYgXU" />
             </div>
         </div>
 
