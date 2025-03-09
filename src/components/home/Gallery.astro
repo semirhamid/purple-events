@@ -2,7 +2,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 font-anton">
         <a
             href="/my-society"
-            class="gallery-card min-h-[400px] md:min-h-[838px]"
+            class="gallery-card min-h-[400px] md:min-h-[838px] opacity-0"
         >
             <div class="card-inner">
                 <div class="card-front bg-[#C1ABA6]">
@@ -19,7 +19,7 @@
         </a>
         <a
             href="/lets-brunch"
-            class="gallery-card min-h-[400px] md:min-h-[838px]"
+            class="gallery-card min-h-[400px] md:min-h-[838px] opacity-0"
         >
             <div class="card-inner">
                 <div class="card-front bg-[#533B4D]">
@@ -36,7 +36,7 @@
         </a>
         <a
             href="/circus-electra"
-            class="gallery-card min-h-[400px] md:min-h-[838px]"
+            class="gallery-card min-h-[400px] md:min-h-[838px] opacity-0"
         >
             <div class="card-inner">
                 <div class="card-front bg-[#F564A9]">
@@ -53,7 +53,7 @@
         </a>
         <a
             href="/circus-electra-spectacle"
-            class="gallery-card min-h-[400px] md:min-h-[838px]"
+            class="gallery-card min-h-[400px] md:min-h-[838px] opacity-0"
         >
             <div class="card-inner">
                 <div class="card-front bg-[#FAA4BD]">
@@ -70,6 +70,37 @@
         </a>
     </div>
 </section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const galleryCards = document.querySelectorAll(".gallery-card");
+
+    galleryCards.forEach((card, index) => {
+        gsap.fromTo(
+            card,
+            {
+                opacity: 0,
+                y: 100,
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top bottom-=100",
+                    end: "top center",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+    });
+</script>
 
 <style lang="scss">
     .gallery-card {
