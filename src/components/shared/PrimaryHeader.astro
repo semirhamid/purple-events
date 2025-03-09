@@ -1,28 +1,147 @@
 ---
-
+// Add client-side script functionality
 ---
 
-<header class="bg-black text-white px-20 py-10">
+<header class="bg-black text-white px-6 md:px-20 py-6 md:py-10">
     <nav
         class="flex justify-between items-center font-inter text-[22px] font-semibold"
     >
-        <ul class="flex justify-between items-center gap-x-12">
+        <!-- Mobile hamburger button -->
+        <button
+            id="menu-btn"
+            class="hamburger md:hidden flex flex-col justify-center items-center gap-1.5"
+            aria-label="Menu"
+        >
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+
+        <!-- Navigation links -->
+        <ul id="nav-menu" class="nav-links md:flex items-center gap-x-12">
             <li>
-                <a href="/">Link 1</a>
+                <a href="/" class="nav-link">Link 1</a>
             </li>
             <li>
-                <a href="/">Link 2</a>
+                <a href="/" class="nav-link">Link 2</a>
             </li>
             <li>
-                <a href="/">Link 3</a>
+                <a href="/" class="nav-link">Link 3</a>
             </li>
             <li>
-                <a href="/">Link 4</a>
+                <a href="/" class="nav-link">Link 4</a>
             </li>
         </ul>
 
-        <div class="flex justify-between items-center">
-            <a href="/contact-us">Contact Us</a>
+        <div class="flex items-center">
+            <a href="/contact-us" class="nav-link">Contact Us</a>
         </div>
     </nav>
 </header>
+
+<style>
+    /* Mobile menu styles */
+    .nav-links {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 6rem 2rem;
+        flex-direction: column;
+        gap: 2rem;
+        z-index: 40;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .nav-links.active {
+        display: flex;
+        transform: translateX(0);
+    }
+
+    /* Hamburger button styles */
+    .hamburger {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        z-index: 50;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    .hamburger-line {
+        width: 100%;
+        height: 2px;
+        background-color: white;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .hamburger.active .hamburger-line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .hamburger-line:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Link hover animation */
+    .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: white;
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        .nav-links {
+            position: static;
+            padding: 0;
+            background: none;
+            transform: none;
+            display: flex;
+            flex-direction: row;
+        }
+    }
+</style>
+
+<script>
+    const menuBtn = document.getElementById("menu-btn");
+    const navMenu = document.getElementById("nav-menu");
+
+    menuBtn?.addEventListener("click", () => {
+        menuBtn.classList.toggle("active");
+        navMenu?.classList.toggle("active");
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = navMenu?.classList.contains("active")
+            ? "hidden"
+            : "auto";
+    });
+
+    // Close menu when clicking a link
+    const navLinks = document.querySelectorAll(".nav-link");
+    navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            menuBtn?.classList.remove("active");
+            navMenu?.classList.remove("active");
+            document.body.style.overflow = "auto";
+        });
+    });
+</script>
