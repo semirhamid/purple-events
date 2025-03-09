@@ -36,6 +36,7 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
     gsap.registerPlugin(ScrollTrigger);
 
     const galleryItems = document.querySelectorAll(".gallery-item");
+    const isMobile = window.innerWidth < 768; // Define mobile breakpoint
 
     galleryItems.forEach((item, i) => {
         gsap.set(item, {
@@ -48,10 +49,10 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
             opacity: 1,
             duration: 1,
             ease: "power3.out",
-            delay: i * 0.15,
+            delay: i * (isMobile ? 0.1 : 0.15), // Faster delay on mobile
             scrollTrigger: {
                 trigger: item,
-                start: "top 85%",
+                start: `top ${isMobile ? "50%" : "85%"}`, // Different trigger point for mobile
                 toggleActions: "play none none reverse",
             },
         });
