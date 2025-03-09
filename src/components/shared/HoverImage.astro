@@ -12,7 +12,12 @@ const { src, alt, aspectRatio = "3/4", className } = Astro.props;
 ---
 
 <div class={`aspect-[${aspectRatio}] overflow-hidden relative ${className}`}>
-    <Image src={src} alt={alt} class="w-full h-full object-cover" />
+    <Image
+        src={src}
+        alt={alt}
+        class="w-full h-full object-cover"
+        loading="eager"
+    />
 </div>
 
 <style>
