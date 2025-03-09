@@ -6,31 +6,45 @@ import Join from "@components/buttons/Join.astro";
 ---
 
 <section class="bg-black text-white pt-4">
-    <div class="container mr-auto w-full grid grid-cols-8 gap-24">
-        <div class="col-span-3">
-            <Image
-                src={Hero}
-                alt="Circus Electra"
-                class="w-full h-full object-cover"
-            />
-        </div>
-        <div class="col-span-4">
-            <div class="flex">
+    <div
+        class="container mr-auto w-full grid grid-cols-1 lg:grid-cols-8 gap-8 lg:gap-24 px-4 lg:px-0"
+    >
+        <div class="col-span-1 lg:col-span-3">
+            <div class="lg:hidden">
                 <Image
                     src={Logo}
                     alt="Circus Electra"
-                    class="max-h-48 w-auto mt-7"
+                    class="max-h-32 lg:max-h-48 w-auto"
                 />
             </div>
-            <h1 class="text-[80px] uppercase font-anton mb-10 leading-tight">
+            <div>
+                <Image
+                    src={Hero}
+                    alt="Circus Electra"
+                    class="w-full h-full object-cover mt-5 lg:mt-0"
+                />
+            </div>
+        </div>
+
+        <div class="col-span-1 lg:col-span-4">
+            <div class="justify-center lg:justify-start hidden lg:flex">
+                <Image
+                    src={Logo}
+                    alt="Circus Electra"
+                    class="max-h-32 lg:max-h-48 w-auto mt-7"
+                />
+            </div>
+            <h1
+                class="text-[40px] lg:text-[80px] uppercase font-anton mb-6 lg:mb-10 leading-tight text-center lg:text-left"
+            >
                 A Spectacle of Pure Fun
             </h1>
-            <div class="text-white/60 text-[20px]">
+            <div class="text-white/60 text-[16px] lg:text-[20px]">
                 <p class="mb-6">
                     Step into Circus Electra, a high-energy, fully immersive
                     event where twisted circus themes and mind-blowing
                     production create an atmosphere like no other. This is not
-                    just a party—it’s an explosion of visuals, entertainment,
+                    just a party—it's an explosion of visuals, entertainment,
                     and non-stop excitement.
                 </p>
                 <p class="mb-6">
@@ -38,7 +52,7 @@ import Join from "@components/buttons/Join.astro";
                     the spectacle, expect a lineup of drummers, singers,
                     dancers, saxophonists, trumpeters, guitarists, and
                     keyboardists, all bringing the energy to dizzying heights.
-                    Don’t be surprised if a unicorn or a mischievous clown stops
+                    Don't be surprised if a unicorn or a mischievous clown stops
                     by to say hello! Every moment is captured by our
                     photographers and videographers, ensuring the memories last
                     long after the night ends.
@@ -48,7 +62,7 @@ import Join from "@components/buttons/Join.astro";
                     #AllTheFunIsThisWay
                 </p>
             </div>
-            <div class="mt-10">
+            <div class="mt-8 lg:mt-10 flex justify-center lg:justify-start">
                 <Join />
             </div>
         </div>
