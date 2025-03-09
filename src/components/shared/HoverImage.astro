@@ -5,13 +5,14 @@ interface Props {
     src: ImageMetadata;
     alt: string;
     aspectRatio?: string;
+    className?: string;
 }
 
-const { src, alt, aspectRatio = "3/4" } = Astro.props;
+const { src, alt, aspectRatio = "3/4", className } = Astro.props;
 ---
 
 <div
-    class={`aspect-[${aspectRatio}] overflow-hidden group cursor-pointer opacity-0 translate-y-10`}
+    class={`aspect-[${aspectRatio}] overflow-hidden group cursor-pointer opacity-0 translate-y-10 ${className}`}
     data-animate
 >
     <Image
