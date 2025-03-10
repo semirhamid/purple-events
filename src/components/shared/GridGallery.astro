@@ -15,7 +15,7 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
 >
     {
         images.map((src, index) => (
-            <div class="gallery-item group">
+            <div class="gallery-item group" data-image-index={index}>
                 <div class="aspect-[3/4] overflow-hidden relative">
                     <HoverImage
                         src={src}
@@ -29,6 +29,42 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
     }
 </div>
 
+<dialog
+    id="imageModal"
+    class="modal fixed inset-0 bg-transparent p-0 m-0 w-full h-full max-w-none max-h-none backdrop:bg-black/90"
+>
+    <div class="modal-overlay absolute inset-0"></div>
+    <div class="relative w-full h-full flex items-center justify-center p-4">
+        <button
+            class="close-modal lg:cursor-pointer absolute top-4 right-4 w-12 h-12 bg-black/30 hover:bg-black/50 backdrop-blur rounded-full flex items-center justify-center transition-all duration-300"
+            aria-label="Close modal"
+        >
+            <svg
+                class="w-6 h-6 text-white/90"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+            >
+                <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"></path>
+            </svg>
+        </button>
+        <div class="modal-content-wrapper relative overflow-hidden">
+            <div
+                class="modal-reveal absolute inset-0 bg-white transform -translate-y-full"
+            >
+            </div>
+            <div class="modal-content relative">
+                <img
+                    src=""
+                    alt=""
+                    class="max-w-[85vw] max-h-[85vh] object-contain opacity-0"
+                />
+            </div>
+        </div>
+    </div>
+</dialog>
+
 <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,8 +72,15 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
     gsap.registerPlugin(ScrollTrigger);
 
     const galleryItems = document.querySelectorAll(".gallery-item");
-    const isMobile = window.innerWidth < 768; // Define mobile breakpoint
+    const isMobile = window.innerWidth < 768;
+    const modal = document.querySelector("#imageModal") as HTMLDialogElement;
+    const modalImg = modal?.querySelector("img");
+    const closeBtn = modal?.querySelector(".close-modal");
+    const modalContent = modal?.querySelector(".modal-content");
+    const modalOverlay = modal?.querySelector(".modal-overlay");
+    const modalReveal = modal?.querySelector(".modal-reveal");
 
+    // Animation for gallery items
     galleryItems.forEach((item, i) => {
         gsap.set(item, {
             y: 100,
@@ -49,13 +92,79 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
             opacity: 1,
             duration: 1,
             ease: "power3.out",
-            delay: i * (isMobile ? 0.1 : 0.15), // Faster delay on mobile
+            delay: i * (isMobile ? 0.1 : 0.15),
             scrollTrigger: {
                 trigger: item,
-                start: `top ${isMobile ? "50%" : "85%"}`, // Different trigger point for mobile
+                start: `top ${isMobile ? "50%" : "85%"}`,
                 toggleActions: "play none none reverse",
             },
         });
+
+        // Add click handler for lightbox
+        item.addEventListener("click", () => {
+            const img = item.querySelector("img");
+            if (img && modalImg && modal) {
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+                modal.showModal();
+
+                // Luxurious reveal animation
+                const tl = gsap.timeline({
+                    defaults: { ease: "power3.inOut" },
+                });
+
+                tl.set(modalReveal, {
+                    y: "100%",
+                })
+                    .set(modalImg, {
+                        scale: 1.1,
+                        opacity: 0,
+                    })
+                    .to(modalReveal, {
+                        y: 0,
+                        duration: 0.5,
+                    })
+                    .to(
+                        modalReveal,
+                        {
+                            y: "-100%",
+                            duration: 0.5,
+                        },
+                        "reveal"
+                    )
+                    .to(
+                        modalImg,
+                        {
+                            scale: 1,
+                            opacity: 1,
+                            duration: 0.8,
+                            ease: "power2.out",
+                        },
+                        "reveal-=0.3"
+                    );
+            }
+        });
+    });
+
+    // Close modal handlers with animation
+    const closeModal = () => {
+        if (modalContent && modal && modalImg) {
+            gsap.to(modalImg, {
+                scale: 0.95,
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.in",
+                onComplete: () => modal.close(),
+            });
+        }
+    };
+
+    closeBtn?.addEventListener("click", closeModal);
+    modalOverlay?.addEventListener("click", closeModal);
+
+    // Handle escape key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal?.open) closeModal();
     });
 </script>
 
@@ -82,6 +191,36 @@ const { images, altPrefix = "Gallery image" } = Astro.props;
 
     .gallery-item:hover::after {
         opacity: 1;
+    }
+
+    .modal::backdrop {
+        animation: fade-in 0.3s ease-out;
+    }
+
+    .modal-overlay {
+        cursor: pointer;
+    }
+
+    .modal-reveal {
+        background: linear-gradient(to bottom right, #ffffff, #f3f3f3);
+        will-change: transform;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    dialog {
+        &:modal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 
     body {
