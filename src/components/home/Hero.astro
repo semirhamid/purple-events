@@ -3,14 +3,18 @@ import { Image } from "astro:assets";
 import Logo from "@assets/logo.png";
 ---
 
-<section class="bg-black text-white pt-10 pb-20 px-5 lg:px-10 2xl:px-0">
+<section
+    class="bg-black text-white pt-10 pb-20 px-5 lg:px-10 2xl:px-0"
+    id="hero-section"
+>
     <div class="flex justify-between items-center container mx-auto">
-        <div class="">
-            <div class="flex justify-center items-center">
+        <div class="w-full">
+            <div class="flex justify-center items-center" id="logo-container">
                 <Image src={Logo} alt="Logo" class="max-h-32 my-10 w-auto" />
             </div>
             <p
-                class="text-2xl  text-center mt-5 md:mt-0 lg:text-[60px] font-medium md:font-semibold font-inter tracking-[-2px] leading-[120%]"
+                class="text-2xl text-center mt-5 md:mt-0 lg:text-[60px] font-medium md:font-semibold font-inter tracking-[-2px] leading-[120%]"
+                id="hero-text"
             >
                 Something about our events could go here, here and some more
                 here.
@@ -18,3 +22,40 @@ import Logo from "@assets/logo.png";
         </div>
     </div>
 </section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initial entrance animations
+    const tl = gsap.timeline();
+
+    tl.from("#logo-container", {
+        y: 30,
+        duration: 1,
+        ease: "power2.out",
+    }).from(
+        "#hero-text",
+        {
+            y: 40,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+        },
+        "-=0.5"
+    );
+
+    // Subtle parallax effect on scroll
+    gsap.to("#hero-section", {
+        scrollTrigger: {
+            trigger: "#hero-section",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+        },
+        y: 100,
+        ease: "none",
+    });
+</script>
