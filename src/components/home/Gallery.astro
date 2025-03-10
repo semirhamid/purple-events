@@ -1,3 +1,11 @@
+---
+import { Image } from "astro:assets";
+import SocietyLogo from "@assets/society/society logo.png";
+// import LetsBrunchLogo from "@assets/lets-brunch/l logo.png";
+import CircusElectraLogo from "@assets/circus/logo.png";
+import CircusElectraSpectacleLogo from "@assets/circus_spectacle/logo.png";
+---
+
 <section class="bg-black text-white">
     <div class="grid grid-cols-1 md:grid-cols-2 font-anton">
         <a
@@ -6,9 +14,11 @@
         >
             <div class="card-inner">
                 <div class="card-front bg-[#C1ABA6]">
-                    <p class="text-center uppercase text-5xl md:text-8xl">
-                        My Societi
-                    </p>
+                    <Image
+                        src={SocietyLogo}
+                        alt="My Societi"
+                        class="max-w-[380px] h-auto object-cover"
+                    />
                 </div>
                 <div class="card-back bg-[#C1ABA6]">
                     <p class="text-center text-2xl md:text-4xl">
@@ -40,9 +50,11 @@
         >
             <div class="card-inner">
                 <div class="card-front bg-[#F564A9]">
-                    <p class="text-center uppercase text-5xl md:text-8xl">
-                        Circus Electra
-                    </p>
+                    <Image
+                        src={CircusElectraLogo}
+                        alt="Circus Electra"
+                        class="max-w-[380px] h-auto object-cover"
+                    />
                 </div>
                 <div class="card-back bg-[#F564A9]">
                     <p class="text-center text-2xl md:text-4xl">
@@ -57,9 +69,11 @@
         >
             <div class="card-inner">
                 <div class="card-front bg-[#FAA4BD]">
-                    <p class="text-center uppercase text-5xl md:text-8xl">
-                        The House Of Circus Electra
-                    </p>
+                    <Image
+                        src={CircusElectraSpectacleLogo}
+                        alt="Circus Electra Spectacle"
+                        class="max-w-[380px] h-auto object-cover"
+                    />
                 </div>
                 <div class="card-back bg-[#FAA4BD]">
                     <p class="text-center text-2xl md:text-4xl">
