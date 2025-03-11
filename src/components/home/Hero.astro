@@ -10,7 +10,7 @@ import Logo from "@assets/logo.png";
     <div class="flex justify-between items-center container mx-auto">
         <div class="w-full pb-20">
             <div class="flex justify-center items-center" id="logo-container">
-                <Image src={Logo} alt="Logo" class="max-h-32 my-10 w-auto" />
+                <Image loading="eager" priority src={Logo} alt="Logo" class="max-h-32 my-10 w-auto" />
             </div>
             <p
                 class="text-2xl text-center mt-5 md:mt-0 lg:text-[60px] font-medium md:font-semibold font-inter tracking-[-2px] leading-[120%]"
@@ -41,7 +41,7 @@ import Logo from "@assets/logo.png";
         {
             y: 40,
             opacity: 0,
-            duration: 1,
+            duration: 1.2,
             ease: "power2.out",
         },
         "-=0.5"
