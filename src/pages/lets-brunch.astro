@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SecondaryHeader from "@components/shared/SecondaryHeader.astro";
+import Hero from "@components/events/BrunchHero.astro";
+import GridGallery from "@components/shared/GridGallery.astro";
+
+const rawImports = import.meta.glob<ImageMetadata>(
+    "../assets/lets_brunch/gallery/*.jpg",
+    {
+        eager: true,
+        import: "default",
+    }
+);
+const images = Object.values(rawImports);
+---
+
+<Layout
+    title="My Society - Purple Wave Events"
+    description="Discover My Society events - where community meets entertainment in unique social gatherings and experiences."
+    type="article"
+>
+    <div class="bg-black">
+        <SecondaryHeader />
+        <Hero />
+        <div class="py-20 w-full"></div>
+        <div class="container w-full mr-auto px-5">
+            <div class="col-span-4 mb-20">
+                <div
+                    class="relative w-full aspect-video overflow-hidden rounded-[10px] max-h-[600px]"
+                    style="background-image: url('https://img.youtube.com/vi/cfzACoquUj8/hqdefault.jpg'); background-size: cover; background-position: center;"
+                >
+                    <iframe
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/cfzACoquUj8?autoplay=0&rel=0"
+                        title="MySociety Event Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    >
+                    </iframe>
+                </div>
+            </div>
+
+            <GridGallery images={images} altPrefix="My Society image" />
+
+            <div class="w-full h-96"></div>
+            <div class="w-full h-96"></div>
+        </div>
+    </div>
+</Layout>

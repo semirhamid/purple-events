@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import BrunchLogo from "@assets/lets_brunch/logo.png";
+import BrunchHero from "@assets/lets_brunch/hero.jpg";
+import Join from "@components/buttons/Join.astro";
+---
+
+<section class="bg-black text-white pt-4">
+    <div
+        class="container mr-auto w-full grid grid-cols-1 lg:grid-cols-8 gap-8 lg:gap-24 px-4 lg:px-0"
+    >
+        <div class="col-span-1 lg:col-span-3">
+            <div class="flex justify-center lg:justify-start lg:hidden">
+                <Image
+                    src={BrunchLogo}
+                    alt="Let's Brunch"
+                    class="max-h-32 lg:max-h-48 w-auto"
+                />
+            </div>
+            <div>
+                <Image
+                
+                    src={BrunchHero}
+                    alt="Let's Brunch"
+                    class="w-full h-full object-cover"
+                />
+            </div>
+        </div>
+        <div class="col-span-1 lg:col-span-4">
+            <div class="justify-center lg:justify-start hidden lg:flex">
+                <Image
+                    src={BrunchLogo}
+                    alt="Let's Brunch"
+                    class="max-h-32 lg:max-h-48 w-auto mt-7"
+                />
+            </div>
+            <h1
+                class="text-[40px] lg:text-[80px] uppercase font-anton mb-6 lg:mb-10 leading-tight text-center lg:text-left"
+            >
+                Let's Brunch
+            </h1>
+            <div class="text-white/60 text-[16px] lg:text-[20px]">
+                <p class="mb-6">
+                    Born in Berkshire and redefining high-end nightlife across
+                    the South, MySocieti is the original brand in the Electra
+                    family—an exclusive movement for those who appreciate
+                    refined experiences, exceptional music, and an atmosphere of
+                    effortless sophistication.
+                </p>
+                <p class="mb-6">
+                    With day-to-night experiences and luxury events with a fun
+                    twist, MySocieti is where world-famous DJs, charismatic
+                    hosts, and live percussionists create an unmatched ambiance.
+                    Whether it's a sun-drenched day party or an all-night
+                    celebration, expect full-scale production, picture walls,
+                    professional photographers, and videographers capturing
+                    every unforgettable moment.
+                </p>
+                <p>
+                    Come wearing your smiles and your dancing shoes—this is
+                    MySocieti.
+                </p>
+            </div>
+            <div class="mt-8 lg:mt-10 flex justify-center lg:justify-start">
+                <Join
+                    link="https://www.instagram.com/theletsbrunch?igsh=MTI4aG9zaWh4Yzd3"
+                />
+            </div>
+        </div>
+    </div>
+</section>
